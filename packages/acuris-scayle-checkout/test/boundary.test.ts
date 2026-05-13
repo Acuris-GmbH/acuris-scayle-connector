@@ -4,7 +4,30 @@ import {
   toAcurisInput,
   toBaseAddress,
   suggestionToBaseAddress,
+  normalizeHouseNumber,
 } from "../src/boundary.js";
+
+describe("normalizeHouseNumber", () => {
+  it("strips leading zeros from purely-numeric strings", () => {
+    expect(normalizeHouseNumber("0001")).toBe("1");
+    expect(normalizeHouseNumber("0042")).toBe("42");
+  });
+  it("strips leading zeros from alpha-suffixed strings", () => {
+    expect(normalizeHouseNumber("0042B")).toBe("42B");
+  });
+  it("keeps a single zero", () => {
+    expect(normalizeHouseNumber("0")).toBe("0");
+  });
+  it("passes through undefined / empty", () => {
+    expect(normalizeHouseNumber(undefined)).toBeUndefined();
+    expect(normalizeHouseNumber("")).toBe("");
+  });
+  it("passes through already-normalized values", () => {
+    expect(normalizeHouseNumber("1")).toBe("1");
+    expect(normalizeHouseNumber("10")).toBe("10");
+    expect(normalizeHouseNumber("42B")).toBe("42B");
+  });
+});
 
 describe("toAcurisInput", () => {
   it("maps SCAYLE BaseAddress to Acuris fielded input", () => {
@@ -143,5 +166,19 @@ describe("suggestionToBaseAddress", () => {
     expect(a.zipCode).toBe("67549");
     expect(a.city).toBe("Worms");
     expect(a.firstName).toBe("Jane");
+  });
+
+  it("strips leading-zero padding from Acuris house_number (DEU ref-DB quirk)", () => {
+    const a = suggestionToBaseAddress(
+      {
+        country: "deu",
+        street: "Hammanstr.",
+        house_number: "0001", // ← directly from /suggest
+        city: "Worms",
+        postcode: "67549",
+      },
+      { firstName: "Jane", lastName: "Brand" },
+    );
+    expect(a.houseNumber).toBe("1"); // ← normalized for display
   });
 });
