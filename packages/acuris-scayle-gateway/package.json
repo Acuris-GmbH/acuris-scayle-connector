@@ -1,0 +1,62 @@
+{
+  "name": "@acuris-geo/scayle-gateway",
+  "version": "0.1.0",
+  "description": "SCAYLE address-check gateway handler — implements SCAYLE's third-party address-validation contract for Acuris Address Validation & Geocoding.",
+  "keywords": [
+    "acuris",
+    "scayle",
+    "address-validation",
+    "address-check",
+    "geocoding",
+    "gateway",
+    "isv"
+  ],
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node ./build-cjs.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "license": "MIT",
+  "author": "Acuris GmbH <engineering@acuris-geo.com>",
+  "homepage": "https://github.com/Acuris-GmbH/acuris-scayle-connector/tree/main/packages/acuris-scayle-gateway#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Acuris-GmbH/acuris-scayle-connector.git",
+    "directory": "packages/acuris-scayle-gateway"
+  },
+  "bugs": {
+    "url": "https://github.com/Acuris-GmbH/acuris-scayle-connector/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@acuris-geo/av-sdk": "^0.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "@vitest/coverage-v8": "^2.1.4",
+    "typescript": "^5.5.4",
+    "vitest": "^2.1.4"
+  }
+}
