@@ -1,7 +1,7 @@
 {
   "name": "@acuris-geo/scayle-gateway",
-  "version": "0.1.0",
-  "description": "SCAYLE address-check gateway handler — implements SCAYLE's third-party address-validation contract for Acuris Address Validation & Geocoding.",
+  "version": "0.1.1",
+  "description": "SCAYLE address-check gateway handler \u2014 implements SCAYLE's third-party address-validation contract for Acuris Address Validation & Geocoding.",
   "keywords": [
     "acuris",
     "scayle",
@@ -51,7 +51,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@acuris-geo/av-sdk": "^0.1.1"
+    "@acuris-geo/av-sdk": "^0.3.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.10",
